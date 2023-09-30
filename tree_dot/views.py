@@ -50,7 +50,12 @@ def scan(path: str, view: BaseView, dir_filter: SkipDirectory) -> list[str]:
             if skip(directory, dir_filter):
                 skip_roots.append(os.path.join(root, directory))
     for root, directories, filenames in os.walk(path):
-        if root in skip_roots:
+        skip_ = False
+        for root_prefix in skip_roots:
+            if root.startswith(root_prefix):
+                skip_ = True
+                break
+        if skip_:
             continue
         for filename in filenames:
             if keep(filename, view):

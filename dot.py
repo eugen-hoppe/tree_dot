@@ -6,7 +6,7 @@ from tree_dot.views import BaseView
 def fast_api_project() -> tuple[SkipDirectory, BaseView]:
     skip_dir = SkipDirectory()
     skip_dir.names = [
-        "__pycache__", ".git", ".venv", "venv", "tree_dot"
+        "__pycache__", ".git", ".venv", "venv", "tree_do", "sandbox"
     ]
     skip_dir.if_starts_with = [
         ".", "_", "test_"
