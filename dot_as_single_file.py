@@ -1,6 +1,7 @@
 # 2023 09 30
 import os
 from dataclasses import dataclass, field
+from typing import Callable
 
 
 # models.py
@@ -236,12 +237,6 @@ def scan(path: str, view: BaseView, dir_filter: SkipDirectory) -> list[str]:
 
 # report.py
 # =========
-import os
-
-from tree_dot.models import SkipDirectory, Dot
-from tree_dot.views import BaseView, keep, scan, skip
-from typing import Callable
-
 OUTPUT = ".compressed_context"
 MD_TITLE = "# Project Overview"
 BR = "\n"
