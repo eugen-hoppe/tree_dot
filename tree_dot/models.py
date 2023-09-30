@@ -1,3 +1,5 @@
+#tree_dot/models.py
+
 from dataclasses import dataclass, field
 
 
@@ -111,3 +113,18 @@ class PY(DotHash):
 class TXTRequirements(TXT):
     prefix: str = "requirements"
     comment: tuple[str, str] = ("# ", "")
+
+
+@dataclass
+class JS(DotSlash):
+    ext: str = "js"
+
+
+@dataclass
+class TSX(DotSlash):
+    ext: str = "tsx"
+
+
+@dataclass
+class TS(DotSlash):
+    ext: str = "ts"

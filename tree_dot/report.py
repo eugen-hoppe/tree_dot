@@ -30,12 +30,12 @@ def overview_tree(
     return "\n".join(tree_structure)
 
 
-def code_block(dot_file: Dot, title: str = "") -> str:
+def code_block(dot_file: Dot, comment: str | None, title: str = "") -> str:
     with open(dot_file.path) as file:
         content = file.read()
     
-    if dot_file.comment:
-        comment = BR + dot_file.comment[0] + dot_file.comment[1] + BR
+    if comment:
+        comment = BR + comment + BR
     else:
         comment, title = "", f"**{dot_file.path.removeprefix('./')}**{BR}"
     block = BLOCK + "{lang}" + "{comment}" + BR + "{content}" + BLOCK
@@ -50,9 +50,10 @@ def md_report(view_context: Callable, output: str = OUTPUT) -> str:
     for file_path in paths:
         file = keep(file_path.split("/")[-1], view)
         file.path = file_path
+        comment = None
         if file.comment:
-            file.comment = (file.comment[0] + file.path, file.comment[1])
-        md_blocks.append(code_block(file) + BR)
+            comment = file.comment[0] + file_path.removeprefix('./') + file.comment[1]
+        md_blocks.append(code_block(file, comment) + BR)
     if not os.path.exists(output):
         os.mkdir(output)
     md_file = view_context.__name__ + ".md"

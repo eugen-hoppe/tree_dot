@@ -11,8 +11,8 @@ class BaseView(
         templates.Database,
         templates.Docker,
         templates.Python,
-        templates.Config
-        ):
+        templates.Config,
+        templates.JavaScript):
     pass
 
 

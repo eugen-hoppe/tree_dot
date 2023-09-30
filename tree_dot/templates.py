@@ -1,3 +1,5 @@
+#tree_dot/templates.py
+
 from dataclasses import dataclass, field
 
 import tree_dot.models as m
@@ -5,9 +7,8 @@ import tree_dot.models as m
 
 @dataclass
 class Template:
-    gitignore: m.Gitignore | None  = field(
-        default_factory=lambda: m.Gitignore()
-    )
+    gitignore: m.Gitignore | None  = field(default_factory=lambda: m.Gitignore())
+
 
 @dataclass
 class Web(Template):
@@ -40,3 +41,11 @@ class Python(Template):
     txt_requirements: m.TXTRequirements | None  = field(
         default_factory=lambda: m.TXTRequirements()
     )
+
+
+@dataclass
+class JavaScript(Template):
+    js: m.TSX | None = field(default_factory=lambda: m.JS())
+    tsx: m.TSX | None = field(default_factory=lambda: m.TSX())
+    ts: m.TSX | None = field(default_factory=lambda: m.TSX())
+
