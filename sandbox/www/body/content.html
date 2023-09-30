@@ -1,0 +1,7 @@
+<div class="container">
+    {% for div_id, div_content in content %}
+        <div class="container" id="{{ div_id }}">
+            {{ div_content | safe }}
+        </div>
+    {% endfor %}
+</div>
