@@ -7,7 +7,7 @@ from typing import Callable
 OUTPUT = ".compressed_context"
 MD_TITLE = "# Project Overview"
 BR = "\n"
-BLOCK = "```"
+BLOCK = "`" + "`" + "`"
 
 
 def overview_tree(

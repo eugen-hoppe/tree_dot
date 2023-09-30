@@ -1,5 +1,3 @@
-#tree_dot/templates.py
-
 from dataclasses import dataclass, field
 
 import tree_dot.models as m

@@ -1,5 +1,3 @@
-#dot.py
-
 from tree_dot.models import SkipDirectory
 from tree_dot.report import md_report
 from tree_dot.views import BaseView

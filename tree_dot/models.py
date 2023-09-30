@@ -1,5 +1,3 @@
-#tree_dot/models.py
-
 from dataclasses import dataclass, field
 
 
@@ -32,7 +30,7 @@ class Dot:
 
 @dataclass
 class DotHash(Dot):
-    comment: tuple[str, str] = ("#", "")
+    comment: tuple[str, str] = ("# ", "")
 
 
 @dataclass
