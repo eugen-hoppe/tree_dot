@@ -5,7 +5,9 @@ from tree_dot.views import BaseView, keep, scan, skip
 from typing import Callable
 
 
-OUTPUT = ".compressed_context"
+ZIP_FOLDER = ".trdt"
+OVERVIEW_TITLE = "## Prject Overview"
+OUTPUT = ZIP_FOLDER + "/.compressed_context"
 MD_TITLE = "# Project Overview"
 BR = "\n"
 BLOCK = "`" + "`" + "`"
@@ -21,7 +23,7 @@ def overview_tree(
         if os.path.isdir(path):
             if not skip(item, dir_filter):
                 tree_structure.append(f"{indent}{item}")
-                tree_structure.append(overview_tree(path, indent + "  "))
+                tree_structure.append(overview_tree(dir_filter, view, directory=path, indent=indent + "  "))
         else:
             if keep(item, view):
                 tree_structure.append(f"{indent}{item}")
@@ -44,7 +46,12 @@ def code_block(dot_file: Dot, comment: str | None, title: str = "") -> str:
 def md_report(view_context: Callable, output: str = OUTPUT, root: str = ".") -> str:
     dir_filter, view = view_context()
     paths = scan(root, view, dir_filter)
-    md_blocks = [MD_TITLE + BR]
+    ov_tree = overview_tree(dir_filter, view)
+    md_blocks = [
+        MD_TITLE + BR,
+        "#### ROOT FOLDER: " + root,
+        OVERVIEW_TITLE + BR + BLOCK + "txt" + BR + ov_tree + BR + BLOCK
+    ]
     for file_path in paths:
         file = keep(file_path.split("/")[-1], view)
         file.path = file_path
@@ -52,6 +59,8 @@ def md_report(view_context: Callable, output: str = OUTPUT, root: str = ".") -> 
         if file.comment:
             comment = file.comment[0] + file_path.removeprefix("./") + file.comment[1]
         md_blocks.append(code_block(file, comment) + BR)
+    if not os.path.exists(ZIP_FOLDER):
+        os.mkdir(ZIP_FOLDER)
     if not os.path.exists(output):
         os.mkdir(output)
     md_file = view_context.__name__ + ".md"
