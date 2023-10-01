@@ -1,11 +1,11 @@
-# RUN
+### RUN
 
-```python
+```bash
 python3 .trdt/dot.py
 ```
 
 #### or
 
-```python
+```bash
 py .trdt/dot.py
 ```

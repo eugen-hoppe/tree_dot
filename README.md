@@ -2,21 +2,27 @@
 Simplify Project Documentation with TreeDot - A Markdown Compressor for Effortless Report Generation
 
 
-## INSTALL
+### INSTALL
 
 ```bash
 mkdir ".trdt" && cd ".trdt/" && curl -L "https://github.com/eugen-hoppe/tree_dot/raw/main/installation/trdt.zip" -o "trdt.zip" && unzip "trdt.zip" && cd .. && rm ".trdt/trdt.zip"
 ```
 
-## RUN
+### RUN
 
-```python
+```bash
 python3 .trdt/dot.py
 ```
 
 #### or
 
-```python
+```bash
 py .trdt/dot.py
 ```
 
+
+### UNINSTALL
+
+```bash
+rm -R .trdt/
+```
