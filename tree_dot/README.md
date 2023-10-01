@@ -9,3 +9,10 @@ python3 .trdt/dot.py
 ```bash
 py .trdt/dot.py
 ```
+
+### UNINSTALL
+
+```bash
+rm -R .trdt/
+```
+

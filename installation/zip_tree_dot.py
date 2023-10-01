@@ -38,6 +38,9 @@ def main():
     with open(os.path.join(dest_folder, '.gitignore'), 'w') as f:
         f.write("*\n")
     shutil.copy2(single_file, dest_folder)
+    shutil.move(
+        os.path.join(dest_folder, src_folder, "README.md"), os.path.join(dest_folder, "README.md")
+    )
     delete_folder_recursive(os.path.join(dest_folder, "tree_dot", "__pycache__"))
 
     create_zip(dest_folder, zip_name)
