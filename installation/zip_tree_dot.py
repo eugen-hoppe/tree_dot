@@ -30,19 +30,20 @@ def create_zip(source_folder, zip_name):
 
 def main():
     src_folder = "tree_dot"
-    dest_folder = "installation/trdt/.trdt/" + src_folder
+    zip_folder = "installation/trdt/.trdt"
+    dest_folder = zip_folder + "/" + src_folder
     single_file = "dot.py"
     zip_name = "trdt.zip"
     final_dest = "installation"
     copy_files_and_folder(src_folder, dest_folder)
-    with open(os.path.join(dest_folder, '.gitignore'), 'w') as f:
+    with open(os.path.join(zip_folder, '.gitignore'), 'w') as f:
         f.write("*\n")
-    shutil.copy2(single_file, dest_folder)
+    shutil.copy2(single_file, zip_folder)
     delete_folder_recursive(os.path.join(dest_folder, "__pycache__"))
 
     create_zip(dest_folder, zip_name)
     shutil.move(zip_name, os.path.join(final_dest, zip_name))
-    delete_folder_recursive(os.path.join("installation/trdt"))
+    delete_folder_recursive(os.path.join(zip_folder))
 
 
 if __name__ == "__main__":
