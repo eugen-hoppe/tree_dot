@@ -3,7 +3,8 @@ from tree_dot.report import md_report
 from tree_dot.views import BaseView
 
 
-DIRECTORY = "./sandbox"  # DIRECTORY = "."
+# DIRECTORY = "./sandbox"
+DIRECTORY = "."
 SKIP_DIR = SkipDirectory(
     names=["tree_dot", "installation", "trdt"],
     if_starts_with=[".", "_"]
