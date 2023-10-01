@@ -27,7 +27,7 @@ def skip(directory: str, skip_directory: SkipDirectory) -> bool:
     return False
 
 
-def keep(filename: str, view: BaseView) -> Dot | None:
+def keep(filename: str, view: BaseView, filepath: str) -> Dot | None:
     core, *_ = filename.split(".")
     ext = core
     if len(filename.split(".")) > 1:
@@ -37,8 +37,9 @@ def keep(filename: str, view: BaseView) -> Dot | None:
             continue
         if getattr(view, attr, False):
             file: Dot = getattr(view, attr)
+            file.path = filepath
             if ext == file.ext:
-                if file.keep:
+                if file.keep and not file.skip():
                     return file
     return None
 
@@ -59,6 +60,6 @@ def scan(path: str, view: BaseView, dir_filter: SkipDirectory) -> list[str]:
         if skip_:
             continue
         for filename in filenames:
-            if keep(filename, view):
+            if keep(filename, view, os.path.join(root, filename)):
                 paths.append(os.path.join(root, filename))
     return paths

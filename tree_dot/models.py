@@ -16,6 +16,7 @@ class Dot:
     prefix: str = ""
     keep: bool = False
     path: str | None = None
+    exclude_if_starts_with: list[str] = field(default_factory=lambda: list())
 
     def __post_init__(self):
         if self.lang is None:
@@ -26,6 +27,14 @@ class Dot:
 
     def name(self, core: str = "") -> str:
         return self.prefix + core + self.dot_ext()
+    
+    def skip(self) -> bool:
+        if self.keep:
+            for prefix in self.exclude_if_starts_with:
+                if self.path.split("/")[-1].startswith(prefix):
+                    return True
+            return False
+        return True
 
 
 @dataclass
@@ -105,12 +114,6 @@ class ENV(DotHash):
 class PY(DotHash):
     ext: str = "py"
     lang: str = "python"
-
-
-@dataclass
-class TXTRequirements(TXT):
-    prefix: str = "requirements"
-    comment: tuple[str, str] = ("# ", "")
 
 
 @dataclass

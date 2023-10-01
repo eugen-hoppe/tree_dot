@@ -20,7 +20,15 @@ def fast_api_project(
     view.py.keep = True
     view.html.keep = True
     view.dockerfile.keep = True
-    view.txt_requirements.keep = True
+    view.txt.keep = True
+    view.txt.comment = ("# ", "")
+    view.txt.exclude_if_starts_with.append(
+        "py_should_excluded.txt"
+    )
+
+    view.py.exclude_if_starts_with.extend(
+        ["__init__", "dot"]
+    )
 
     return skip_dir, view
 

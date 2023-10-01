@@ -29,7 +29,7 @@ def overview_tree(
                     )
                 )
         else:
-            if keep(item, view):
+            if keep(item, view, item):
                 tree_structure.append(f"{indent}{item}")
     return "\n".join(tree_structure)
 
@@ -57,7 +57,7 @@ def md_report(view_context: Callable, output: str = OUTPUT, root: str = ".") -> 
         OVERVIEW_TITLE + BR + BLOCK + "txt" + BR + ov_tree + BR + BLOCK,
     ]
     for file_path in paths:
-        file = keep(file_path.split("/")[-1], view)
+        file = keep(file_path.split("/")[-1], view, file_path)
         file.path = file_path
         comment = None
         if file.comment:

@@ -6,6 +6,7 @@ import tree_dot.models as m
 @dataclass
 class Template:
     gitignore: m.Gitignore | None = field(default_factory=lambda: m.Gitignore())
+    txt: m.TXT | None = field(default_factory=lambda: m.TXT())
 
 
 @dataclass
@@ -36,9 +37,6 @@ class Docker(Template):
 class Python(Template):
     py: m.PY | None = field(default_factory=lambda: m.PY())
     env: m.ENV | None = field(default_factory=lambda: m.ENV())
-    txt_requirements: m.TXTRequirements | None = field(
-        default_factory=lambda: m.TXTRequirements()
-    )
 
 
 @dataclass
