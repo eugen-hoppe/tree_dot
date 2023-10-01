@@ -41,9 +41,9 @@ def code_block(dot_file: Dot, comment: str | None, title: str = "") -> str:
     return block.format(lang=dot_file.ext, comment=comment, content=content)
 
 
-def md_report(view_context: Callable, output: str = OUTPUT) -> str:
+def md_report(view_context: Callable, output: str = OUTPUT, root: str = ".") -> str:
     dir_filter, view = view_context()
-    paths = scan(".", view, dir_filter)
+    paths = scan(root, view, dir_filter)
     md_blocks = [MD_TITLE + BR]
     for file_path in paths:
         file = keep(file_path.split("/")[-1], view)
