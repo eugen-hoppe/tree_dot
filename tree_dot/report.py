@@ -23,7 +23,11 @@ def overview_tree(
         if os.path.isdir(path):
             if not skip(item, dir_filter):
                 tree_structure.append(f"{indent}{item}")
-                tree_structure.append(overview_tree(dir_filter, view, directory=path, indent=indent + "  "))
+                tree_structure.append(
+                    overview_tree(
+                        dir_filter, view, directory=path, indent=indent + "  "
+                    )
+                )
         else:
             if keep(item, view):
                 tree_structure.append(f"{indent}{item}")
@@ -50,7 +54,7 @@ def md_report(view_context: Callable, output: str = OUTPUT, root: str = ".") -> 
     md_blocks = [
         MD_TITLE + BR,
         "#### ROOT FOLDER: " + root,
-        OVERVIEW_TITLE + BR + BLOCK + "txt" + BR + ov_tree + BR + BLOCK
+        OVERVIEW_TITLE + BR + BLOCK + "txt" + BR + ov_tree + BR + BLOCK,
     ]
     for file_path in paths:
         file = keep(file_path.split("/")[-1], view)

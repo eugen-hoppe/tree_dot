@@ -3,15 +3,16 @@ from tree_dot.report import md_report
 from tree_dot.views import BaseView
 
 
-# DIRECTORY = "./sandbox"
-DIRECTORY = "."
+DIRECTORY = "."  # "./sandbox"
 SKIP_DIR = SkipDirectory(
     names=["tree_dot", "installation", "trdt"],
     if_starts_with=[".", "_"]
 )
 
 
-def fast_api_project(skip_dir: SkipDirectory = SKIP_DIR) -> tuple[SkipDirectory, BaseView]:
+def fast_api_project(
+    skip_dir: SkipDirectory = SKIP_DIR,
+) -> tuple[SkipDirectory, BaseView]:
     skip_dir.names += ["venv"]
     skip_dir.if_starts_with += ["test_"]
     view = BaseView()
@@ -37,9 +38,6 @@ def react_native(skip_dir: SkipDirectory = SKIP_DIR) -> tuple[SkipDirectory, Bas
 
 
 if __name__ == "__main__":
-    context_reports = [
-        fast_api_project,
-        react_native
-    ]
+    context_reports = [fast_api_project, react_native]
     for func in context_reports:
         md_report(view_context=func, root=DIRECTORY)
