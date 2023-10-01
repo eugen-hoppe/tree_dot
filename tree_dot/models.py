@@ -27,7 +27,7 @@ class Dot:
 
     def name(self, core: str = "") -> str:
         return self.prefix + core + self.dot_ext()
-    
+
     def skip(self) -> bool:
         if self.keep:
             for prefix in self.exclude_if_starts_with:

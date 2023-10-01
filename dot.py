@@ -5,8 +5,7 @@ from tree_dot.views import BaseView
 
 DIRECTORY = "."  # "./sandbox"
 SKIP_DIR = SkipDirectory(
-    names=["tree_dot", "installation", "trdt"],
-    if_starts_with=[".", "_"]
+    names=["tree_dot", "installation", "trdt"], if_starts_with=[".", "_"]
 )
 
 
@@ -22,13 +21,9 @@ def fast_api_project(
     view.dockerfile.keep = True
     view.txt.keep = True
     view.txt.comment = ("# ", "")
-    view.txt.exclude_if_starts_with.append(
-        "py_should_excluded.txt"
-    )
+    view.txt.exclude_if_starts_with.append("py_should_excluded.txt")
 
-    view.py.exclude_if_starts_with.extend(
-        ["__init__", "dot"]
-    )
+    view.py.exclude_if_starts_with.extend(["__init__", "dot"])
 
     return skip_dir, view
 
