@@ -7,12 +7,13 @@ from tree_dot.models import Dot, SkipDirectory
 
 @dataclass
 class BaseView(
-        templates.Web,
-        templates.Database,
-        templates.Docker,
-        templates.Python,
-        templates.Config,
-        templates.JavaScript):
+    templates.Web,
+    templates.Database,
+    templates.Docker,
+    templates.Python,
+    templates.Config,
+    templates.JavaScript,
+):
     pass
 
 

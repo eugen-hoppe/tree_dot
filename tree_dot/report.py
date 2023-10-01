@@ -4,6 +4,7 @@ from tree_dot.models import SkipDirectory, Dot
 from tree_dot.views import BaseView, keep, scan, skip
 from typing import Callable
 
+
 OUTPUT = ".compressed_context"
 MD_TITLE = "# Project Overview"
 BR = "\n"
@@ -11,11 +12,8 @@ BLOCK = "`" + "`" + "`"
 
 
 def overview_tree(
-        dir_filter: SkipDirectory,
-        view: BaseView,
-        directory: str = ".",
-        indent=""
-        ) -> str:
+    dir_filter: SkipDirectory, view: BaseView, directory: str = ".", indent=""
+) -> str:
     tree_structure = []
     dir_content = os.listdir(directory)
     for item in dir_content:
@@ -33,7 +31,7 @@ def overview_tree(
 def code_block(dot_file: Dot, comment: str | None, title: str = "") -> str:
     with open(dot_file.path) as file:
         content = file.read()
-    
+
     if comment:
         comment = BR + comment + BR
     else:
@@ -52,7 +50,7 @@ def md_report(view_context: Callable, output: str = OUTPUT) -> str:
         file.path = file_path
         comment = None
         if file.comment:
-            comment = file.comment[0] + file_path.removeprefix('./') + file.comment[1]
+            comment = file.comment[0] + file_path.removeprefix("./") + file.comment[1]
         md_blocks.append(code_block(file, comment) + BR)
     if not os.path.exists(output):
         os.mkdir(output)

@@ -5,12 +5,8 @@ from tree_dot.views import BaseView
 
 def fast_api_project() -> tuple[SkipDirectory, BaseView]:
     skip_dir = SkipDirectory()
-    skip_dir.names = [
-        "__pycache__", ".git", ".venv", "venv", "tree_do", "sandbox"
-    ]
-    skip_dir.if_starts_with = [
-        ".", "_", "test_"
-    ]
+    skip_dir.names = ["__pycache__", ".git", ".venv", "venv", "tree_dot"]
+    skip_dir.if_starts_with = [".", "_", "test_"]
     view = BaseView()
 
     view.py.keep = True
@@ -23,12 +19,8 @@ def fast_api_project() -> tuple[SkipDirectory, BaseView]:
 
 def react_native() -> tuple[SkipDirectory, BaseView]:
     skip_dir = SkipDirectory()
-    skip_dir.names = [
-        "assets", "config", "constants"
-    ]
-    skip_dir.if_starts_with = [
-        ".", "_", "test_"
-    ]
+    skip_dir.names = ["assets", "config", "constants"]
+    skip_dir.if_starts_with = [".", "_"]
 
     view = BaseView()
     view.tsx.keep = True
@@ -38,12 +30,7 @@ def react_native() -> tuple[SkipDirectory, BaseView]:
     return skip_dir, view
 
 
-
-
 if __name__ == "__main__":
-    context_reports = [
-        fast_api_project,
-        react_native
-    ]
+    context_reports = [fast_api_project, react_native]
     for func in context_reports:
         md_report(view_context=func)

@@ -5,7 +5,7 @@ import tree_dot.models as m
 
 @dataclass
 class Template:
-    gitignore: m.Gitignore | None  = field(default_factory=lambda: m.Gitignore())
+    gitignore: m.Gitignore | None = field(default_factory=lambda: m.Gitignore())
 
 
 @dataclass
@@ -16,27 +16,27 @@ class Web(Template):
 
 @dataclass
 class Database(Template):
-    sql: m.SQL | None  = field(default_factory=lambda: m.SQL())
+    sql: m.SQL | None = field(default_factory=lambda: m.SQL())
 
 
 @dataclass
 class Config(Template):
-    json: m.JSON | None  = field(default_factory=lambda: m.JSON())
+    json: m.JSON | None = field(default_factory=lambda: m.JSON())
 
 
 @dataclass
 class Docker(Template):
-    dockerfile: m.Dockerfile | None  = field(default_factory=lambda: m.Dockerfile())
-    docker_compose: m.DockerCompose | None  = field(
+    dockerfile: m.Dockerfile | None = field(default_factory=lambda: m.Dockerfile())
+    docker_compose: m.DockerCompose | None = field(
         default_factory=lambda: m.DockerCompose()
     )
 
 
 @dataclass
 class Python(Template):
-    py: m.PY | None  = field(default_factory=lambda: m.PY())
-    env: m.ENV | None  = field(default_factory=lambda: m.ENV())
-    txt_requirements: m.TXTRequirements | None  = field(
+    py: m.PY | None = field(default_factory=lambda: m.PY())
+    env: m.ENV | None = field(default_factory=lambda: m.ENV())
+    txt_requirements: m.TXTRequirements | None = field(
         default_factory=lambda: m.TXTRequirements()
     )
 
@@ -46,4 +46,3 @@ class JavaScript(Template):
     js: m.TSX | None = field(default_factory=lambda: m.JS())
     tsx: m.TSX | None = field(default_factory=lambda: m.TSX())
     ts: m.TSX | None = field(default_factory=lambda: m.TSX())
-

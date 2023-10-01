@@ -137,7 +137,7 @@ class TS(DotSlash):
 # ============
 @dataclass
 class Template:
-    gitignore: Gitignore | None  = field(default_factory=lambda: Gitignore())
+    gitignore: Gitignore | None = field(default_factory=lambda: Gitignore())
 
 
 @dataclass
@@ -148,27 +148,27 @@ class Web(Template):
 
 @dataclass
 class Database(Template):
-    sql: SQL | None  = field(default_factory=lambda: SQL())
+    sql: SQL | None = field(default_factory=lambda: SQL())
 
 
 @dataclass
 class Config(Template):
-    json: JSON | None  = field(default_factory=lambda: JSON())
+    json: JSON | None = field(default_factory=lambda: JSON())
 
 
 @dataclass
 class Docker(Template):
-    dockerfile: Dockerfile | None  = field(default_factory=lambda: Dockerfile())
-    docker_compose: DockerCompose | None  = field(
+    dockerfile: Dockerfile | None = field(default_factory=lambda: Dockerfile())
+    docker_compose: DockerCompose | None = field(
         default_factory=lambda: DockerCompose()
     )
 
 
 @dataclass
 class Python(Template):
-    py: PY | None  = field(default_factory=lambda: PY())
-    env: ENV | None  = field(default_factory=lambda: ENV())
-    txt_requirements: TXTRequirements | None  = field(
+    py: PY | None = field(default_factory=lambda: PY())
+    env: ENV | None = field(default_factory=lambda: ENV())
+    txt_requirements: TXTRequirements | None = field(
         default_factory=lambda: TXTRequirements()
     )
 
@@ -178,7 +178,6 @@ class JavaScript(Template):
     js: TSX | None = field(default_factory=lambda: JS())
     tsx: TSX | None = field(default_factory=lambda: TSX())
     ts: TSX | None = field(default_factory=lambda: TSX())
-
 
 
 # views.py
@@ -244,11 +243,8 @@ BLOCK = "`" + "`" + "`"
 
 
 def overview_tree(
-        dir_filter: SkipDirectory,
-        view: BaseView,
-        directory: str = ".",
-        indent=""
-        ) -> str:
+    dir_filter: SkipDirectory, view: BaseView, directory: str = ".", indent=""
+) -> str:
     tree_structure = []
     dir_content = os.listdir(directory)
     for item in dir_content:
@@ -266,7 +262,7 @@ def overview_tree(
 def code_block(dot_file: Dot, comment: str | None, title: str = "") -> str:
     with open(dot_file.path) as file:
         content = file.read()
-    
+
     if comment:
         comment = BR + comment + BR
     else:
@@ -285,7 +281,7 @@ def md_report(view_context: Callable, output: str = OUTPUT) -> str:
         file.path = file_path
         comment = None
         if file.comment:
-            comment = file.comment[0] + file_path.removeprefix('./') + file.comment[1]
+            comment = file.comment[0] + file_path.removeprefix("./") + file.comment[1]
         md_blocks.append(code_block(file, comment) + BR)
     if not os.path.exists(output):
         os.mkdir(output)
@@ -298,12 +294,8 @@ def md_report(view_context: Callable, output: str = OUTPUT) -> str:
 # ======
 def fast_api_project() -> tuple[SkipDirectory, BaseView]:
     skip_dir = SkipDirectory()
-    skip_dir.names = [
-        "__pycache__", ".git", ".venv", "venv", "tree_do", "sandbox"
-    ]
-    skip_dir.if_starts_with = [
-        ".", "_", "test_"
-    ]
+    skip_dir.names = ["__pycache__", ".git", ".venv", "venv", "tree_do", "sandbox"]
+    skip_dir.if_starts_with = [".", "_", "test_"]
     view = BaseView()
 
     view.py.keep = True
@@ -316,12 +308,8 @@ def fast_api_project() -> tuple[SkipDirectory, BaseView]:
 
 def react_native() -> tuple[SkipDirectory, BaseView]:
     skip_dir = SkipDirectory()
-    skip_dir.names = [
-        "assets", "config", "constants"
-    ]
-    skip_dir.if_starts_with = [
-        ".", "_", "test_"
-    ]
+    skip_dir.names = ["assets", "config", "constants"]
+    skip_dir.if_starts_with = [".", "_", "test_"]
 
     view = BaseView()
     view.tsx.keep = True
@@ -332,9 +320,6 @@ def react_native() -> tuple[SkipDirectory, BaseView]:
 
 
 if __name__ == "__main__":
-    context_reports = [
-        fast_api_project,
-        react_native
-    ]
+    context_reports = [fast_api_project, react_native]
     for func in context_reports:
         md_report(view_context=func)

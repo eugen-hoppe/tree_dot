@@ -1,0 +1,2 @@
+black==23.9.1  # dev
+devtools==0.12.2  # dev
