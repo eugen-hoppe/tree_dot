@@ -5,7 +5,7 @@ Simplify Project Documentation with TreeDot - A Markdown Compressor for Effortle
 ## INSTALL
 
 ```bash
-curl -L "https://github.com/eugen-hoppe/tree_dot/raw/main/installation/.trdt.zip" -o ".trdt.zip" && unzip ".trdt.zip" && rm ".trdt.zip"
+curl -L "https://github.com/eugen-hoppe/tree_dot/raw/main/installation/trdt.zip" -o "trdt.zip" && unzip "trdt.zip" && rm "trdt.zip"
 ```
 
 ## RUN
