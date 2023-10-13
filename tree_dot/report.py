@@ -57,11 +57,12 @@ def md_report(view_context: Callable, output: str = OUTPUT, root: str = ".") -> 
         OVERVIEW_TITLE + BR + BLOCK + "txt" + BR + ov_tree + BR + BLOCK,
     ]
     for file_path in paths:
-        file = keep(file_path.split("/")[-1], view, file_path)
+        file = keep(file_path.split(os.sep)[-1], view, file_path)
         file.path = file_path
         comment = None
         if file.comment:
-            comment = file.comment[0] + file_path.removeprefix("./") + file.comment[1]
+            file_path = file_path.removeprefix("./")  # TODO for Windows
+            comment = file.comment[0] + file_path + file.comment[1]
         md_blocks.append(code_block(file, comment) + BR)
     if not os.path.exists(ZIP_FOLDER):
         os.mkdir(ZIP_FOLDER)
