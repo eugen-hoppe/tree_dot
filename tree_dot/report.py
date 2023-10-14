@@ -6,7 +6,7 @@ from typing import Callable
 
 
 ZIP_FOLDER = ".trdt"
-OVERVIEW_TITLE = "## Prject Overview"
+OVERVIEW_TITLE = "## Project Overview"
 OUTPUT = ZIP_FOLDER + "/.compressed_context"
 MD_TITLE = "# Project Overview"
 BR = "\n"
