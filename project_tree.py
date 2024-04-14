@@ -13,18 +13,20 @@ DIR_PREFIXES = [
     "__",
 ]
 FILE_PREFIXES = [
+    os.path.basename(__file__).removesuffix(".py"),  # this file
     ".",
     "log_",
-    "project_tree"
 ]
 
 
 def create_project_tree(
-    directory: str, extensions: str, dir_prefixes: str, file_prefixes: str
+    directory: str,
+    extensions: str,
+    dir_prefixes: list[str],
+    file_prefixes: list[str]
 ) -> dict[str | int, str | dict]:
     result = {}
     dir_content = sorted(os.listdir(directory))
-
     file_count = 0
     for item in dir_content:
         path = os.path.join(directory, item)
@@ -61,7 +63,10 @@ def read_files_to_dict(
             read_files_to_dict(new_directory, value, result)
 
 
-def create_content_dict(root_directory, project_dict):
+def create_content_dict(
+    root_directory: str,
+    project_dict: dict[str | int, str | dict]
+) -> dict[str, str]:
     content_dict = {}
     read_files_to_dict(root_directory, project_dict, content_dict)
     return content_dict
