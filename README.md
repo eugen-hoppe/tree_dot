@@ -2,6 +2,20 @@
 
 This project provides a set of Python scripts designed to create a comprehensive markdown documentation of a project's file structure and contents. It's particularly useful for developers and teams who need a quick and organized overview of their project files, including specific details like programming language syntax highlighting in markdown format for improved readability.
 
+## Quick Start
+
+```bash
+curl -L -o dot_v2.py https://raw.githubusercontent.com/eugen-hoppe/tree_dot/main/dot.py
+
+```
+
+or
+
+```bash
+curl -L -o dot_v2.py https://raw.githubusercontent.com/eugen-hoppe/tree_dot/main/dot.py && python3 dot_v2.py
+
+```
+
 ## Features
 
 - **Project Tree Generation**: Automatically generates a tree view of the project's directory structure, including all relevant files based on specified extensions.
@@ -32,4 +46,6 @@ Contributions to this project are welcome. Please fork the repository and submit
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-# Legacy: https://github.com/eugen-hoppe/tree_dot/tree/ec180515428d47d62e4833f017cd620f8542fc4c
+
+_[v1.0(depricated)](https://github.com/eugen-hoppe/tree_dot/tree/ec180515428d47d62e4833f017cd620f8542fc4c)_
+
