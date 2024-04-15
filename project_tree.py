@@ -4,15 +4,33 @@ from datetime import datetime
 from typing import TextIO
 
 
+INCLUDE_EXTENSIONS = []
+
+
 # Configuration
 # =============
 ROOT_DIR = "sandbox"
 OVERVIEW_PATH = ".overview"
-INCLUDE_EXTENSIONS = [
-    "py",
-    "html",
-    "txt",
-]
+
+
+# Configuration / Uncomment for Including in Overview Generation
+# ==============================================================
+INCLUDE_EXTENSIONS += ["Dockerfile"]
+# INCLUDE_EXTENSIONS += ["c"]    # C source files
+# INCLUDE_EXTENSIONS += ["cpp"]  # C++ source files
+# INCLUDE_EXTENSIONS += ["css"]  # Cascading Style Sheets
+# INCLUDE_EXTENSIONS += ["csv"]  # Comma-separated values
+INCLUDE_EXTENSIONS += ["html"] # HyperText Markup Language
+# INCLUDE_EXTENSIONS += ["java"] # Java source files
+INCLUDE_EXTENSIONS += ["js"]   # JavaScript
+# INCLUDE_EXTENSIONS += ["json"] # JSON data files
+INCLUDE_EXTENSIONS += ["py"]   # Python script files
+# INCLUDE_EXTENSIONS += ["ts"]   # TypeScript
+# INCLUDE_EXTENSIONS += ["txt"]  # Textdateien
+
+# INCLUDE_EXTENSIONS += ["?" ] # Add Custom Extensions
+
+
 EXCLUDE_DIR_PREFIXES = [
     ".",
     "__",
@@ -20,18 +38,32 @@ EXCLUDE_DIR_PREFIXES = [
 EXCLUDE_FILE_PREFIXES = [
     ".",
     "log_",
+    "py_should_excluded",
 ]
 
 
-# Markdown Creation
-# =================
+# Overview Generation (Markdown)
+# ==============================
+MD_TITLE = "Project Overview"
 PROJECT_TREE_TITLE = "Project Structure"
 CONTENT_SECTION_TITLE = "Content"
 CODE_BLOCK_LABELS = {
+    "js": "javascript",
+    "md": "markdown",
+    "php": "php",
+    "pl": "perl",
+    "ps1": "powershell",
     "py": "python",
-    "html": "html",
-    "txt": "txt",
+    "rb": "ruby",
+    "scss": "scss",
+    "sh": "bash",
+    "sql": "sql",
+    "ts": "typescript",
+    "yaml": "yaml",
+    "yml": "yaml",
+    "Dockerfile": "Dockerfile"
 }
+
 
 # Application Constants
 # =====================
@@ -112,7 +144,6 @@ def generate_markdown_overview(
     content_dict: dict[str, str],
     output_path: str | None = None,
     h2: str = "## ",
-    h3: str ="### ",
     br: str ="\n",
     code: str = "```"
 ) -> None:
@@ -125,18 +156,19 @@ def generate_markdown_overview(
 
         # Project Tree Block
         # ==================
-        md_file.write(f"{h2}{PROJECT_TREE_TITLE}{br}{br}")
+        md_file.write(f"# {MD_TITLE}{br}{br}{h2}{PROJECT_TREE_TITLE}{br}{br}")
         md_file.write(f"{code}txt{br}")
         write_tree_to_md(project_dict, md_file)
         md_file.write(f"{br}{code}{br}{br}")
-        md_file.write(f"{h2}Dateiinhalte{br}{br}")
+        md_file.write(f"{h2}{CONTENT_SECTION_TITLE}{br}{br}")
 
         for path, content in content_dict.items():
 
             # Code Blocks
             # ===========
-            code_label = CODE_BLOCK_LABELS[path.split("/")[-1].split(".")[-1]]
-            md_file.write(f"{h3}{path}{br}{br}")
+            extension = path.split(".")[-1]
+            code_label = CODE_BLOCK_LABELS.get(extension, extension)
+            md_file.write(f"**`{'` / `'.join(path.split('/'))}`**{br}{br}")
             md_file.write(f"{code}{code_label}{br}")
             md_file.write(content)
             md_file.write(f"{br}{code}{br}{br}")
