@@ -9,7 +9,7 @@ INCLUDE_EXTENSIONS = []
 
 # Configuration
 # =============
-ROOT_DIR = "sandbox"
+ROOT_DIR = "."
 OVERVIEW_PATH = ".overview"
 
 
