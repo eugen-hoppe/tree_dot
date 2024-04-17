@@ -179,7 +179,7 @@ if __name__ == "__main__":
         ROOT_DIR,
         INCLUDE_EXTENSIONS,
         EXCLUDE_DIR_PREFIXES,
-        EXCLUDE_FILE_PREFIXES
+        EXCLUDE_FILE_PREFIXES_INCLUDING_THIS_FILE
     )
     generate_markdown_overview(
         project_dict,
