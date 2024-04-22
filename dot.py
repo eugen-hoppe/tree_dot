@@ -159,9 +159,22 @@ def generate_markdown_overview(
         md_file.write(f"# {MD_TITLE}{br}{br}{h2}{PROJECT_TREE_TITLE}{br}{br}")
         md_file.write(f"{code}txt{br}")
         write_tree_to_md(project_dict, md_file)
-        md_file.write(f"{br}{code}{br}{br}")
-        md_file.write(f"{h2}{CONTENT_SECTION_TITLE}{br}{br}")
+        md_file.write(f"{br}{code}{br}")
 
+        # Project View Configuration
+        # ==========================
+        md_file.write(f"{br}{h2}File and Directories Considerations{br}{br}")
+        md_file.write(f"{code}txt{br}")
+        md_file.write(
+            f"INCLUDE_EXTENSIONS: ({', '.join(INCLUDE_EXTENSIONS)}){br}"
+            + f"EXCLUDE_DIR_PREFIXES: ({', '.join(EXCLUDE_DIR_PREFIXES)}){br}"
+            + f"EXCLUDE_FILE_PREFIXES: ({', '.join(EXCLUDE_FILE_PREFIXES)}){br}"
+        )
+        md_file.write(f"{br}{code}{br}")
+
+        # Content
+        # =======
+        md_file.write(f"{br}{h2}{CONTENT_SECTION_TITLE}{br}{br}")
         for path, content in content_dict.items():
 
             # Code Blocks
