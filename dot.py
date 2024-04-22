@@ -166,7 +166,8 @@ def generate_markdown_overview(
         md_file.write(f"{br}{h2}File and Directories Considerations{br}{br}")
         md_file.write(f"{code}txt{br}")
         md_file.write(
-            f"INCLUDE_EXTENSIONS: ({', '.join(INCLUDE_EXTENSIONS)}){br}"
+            f"ROOT_DIR: ({', '.join(ROOT_DIR)}){br}"
+            + f"INCLUDE_EXTENSIONS: ({', '.join(INCLUDE_EXTENSIONS)}){br}"
             + f"EXCLUDE_DIR_PREFIXES: ({', '.join(EXCLUDE_DIR_PREFIXES)}){br}"
             + f"EXCLUDE_FILE_PREFIXES: ({', '.join(EXCLUDE_FILE_PREFIXES)}){br}"
         )
